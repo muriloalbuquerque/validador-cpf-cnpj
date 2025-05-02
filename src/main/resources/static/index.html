@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Validador de CPF/CNPJ</title>
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -22,11 +23,21 @@
       }
 
       try {
-        const res = await fetch(`http://localhost:8080/validar?numero=${numero}`);
-        if (!res.ok) throw new Error("Erro ao consultar API");
+        // chama a API na mesma origem (funciona em localhost e em Railway)
+        const url = `${window.location.origin}/validar?numero=${encodeURIComponent(numero)}`;
+        console.log("Chamando API em", url);
+
+        const res = await fetch(url);
+        console.log("Status da API:", res.status);
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+
         const data = await res.json();
-        resultado.textContent = `${data.tipo} ${data.valido ? "válido" : "inválido"}: ${data.mensagem}`;
+        console.log("Resposta da API:", data);
+
+        // usa a propriedade correta "message"
+        resultado.textContent = data.message;
       } catch (error) {
+        console.error("Erro no fetch:", error);
         resultado.textContent = "Erro ao validar. Verifique a API ou o número.";
       }
     }
