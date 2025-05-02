@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Validador de CPF/CNPJ</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1>Validador</h1>
+<input id="numero" placeholder="Digite o CPF ou CNPJ" />
+<button onclick="validar()">Validar</button>
+<p id="resultado"></p>
+
+<script>
+    async function validar() {
+      const numero = document.getElementById("numero").value.trim();
+      const resultado = document.getElementById("resultado");
+
+      if (!numero) {
+        resultado.textContent = "Por favor, digite um número.";
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:8080/validar?numero=${numero}`);
+        if (!res.ok) throw new Error("Erro ao consultar API");
+        const data = await res.json();
+        resultado.textContent = `${data.tipo} ${data.valido ? "válido" : "inválido"}: ${data.mensagem}`;
+      } catch (error) {
+        resultado.textContent = "Erro ao validar. Verifique a API ou o número.";
+      }
+    }
+</script>
+</body>
+</html>
