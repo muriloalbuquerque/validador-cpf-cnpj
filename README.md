@@ -12,35 +12,57 @@ Um validador eficiente de documentos brasileiros com API REST e interface simple
 - Interface web amigável
 - Código aberto e extensível
 
-## 🚀 Como Usar
-```bash
-# Clone o projeto
-git clone https://github.com/muriloalbuquerque/validador-cpf-cnpj.git
 
-# Execute (com Maven)
+## 🚀 Como usar
+Clone o projeto:
+
+```bash
+git clone https://github.com/muriloalbuquerque/validador-cpf-cnpj.git
+```
+
+Execute com Maven:
+
+```bash
 mvn spring-boot:run
+```
+
 Acesse a API:
 
-http
+```
 GET /validar?numero=12345678909
-📦 Exemplo de Resposta
-json
+```
+
+---
+
+## 📦 Exemplo de resposta
+
+```json
 {
   "numero": "12345678909",
   "valido": true,
   "tipo": "CPF",
   "mensagem": "Documento válido"
 }
-🤝 Como Contribuir
-Faça um fork do projeto
+```
 
-Crie sua branch (git checkout -b feature/incrivel)
+---
 
-Commit suas mudanças (git commit -m 'Add feature incrível')
+## 🤝 Como contribuir
 
-Push para a branch (git push origin feature/incrivel)
+1. Faça um fork do projeto
+2. Crie sua branch:  
+   ```bash
+   git checkout -b feature/incrivel
+   ```
+3. Commit suas mudanças:  
+   ```bash
+   git commit -m "Add feature incrível"
+   ```
+4. Push para a branch:  
+   ```bash
+   git push origin feature/incrivel
+   ```
+5. Abra uma pull request
 
-Abra um Pull Request
-
-📜 Licença
-MIT - Veja o arquivo LICENSE para detalhes.
+## 📜 Licença
+[MIT - Veja o arquivo LICENSE para detalhes](LICENSE)
